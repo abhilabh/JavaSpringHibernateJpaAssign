@@ -1,0 +1,20 @@
+<!-- services.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title th:text="${bankName}">Bank Name</title>
+</head>
+<body>
+    <h1 th:text="${bankName}">Bank Name</h1>
+    <table>
+        <tr>
+            <th>Service Name</th>
+            <th>Description</th>
+        </tr>
+        <tr th:each="service : ${services}">
+            <td th:text="${service.name}">Service Name</td>
+            <td th:text="${service.description}">Description</td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- Define the target bean -->
+    <bean id="a" class="org.wipro.pack.A" />
+
+    <!-- Define the advice beans -->
+    <bean id="beforeAdvice" class="org.wipro.pack.BeforeLoggingAdvice" />
+    <bean id="aroundAdvice" class="org.wipro.pack.AroundTimingAdvice" />
+
+    <!-- Define the pointcut for the target method -->
+    <aop:config>
+        <aop:pointcut id="printOddNumbersInRangePointcut" expression="execution(* org.wipro.pack.A.printOddNumbersInRange())" />
+    </aop:config>
+
+    <!-- Apply the advice to the pointcut -->
+    <aop:config>
+        <aop:advisor advice-ref="beforeAdvice" pointcut-ref="printOddNumbersInRangePointcut" />
+    </aop:config>
+
+    <aop:config>
+        <aop:advisor advice-ref="aroundAdvice" pointcut-ref="printOddNumbersInRangePointcut" />
+    </aop:config>
+
+</beans>

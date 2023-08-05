@@ -1,0 +1,20 @@
+<!-- branches.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title th:text="${bankName}">Bank Name</title>
+</head>
+<body>
+    <h1 th:text="${bankName}">Bank Name</h1>
+    <table>
+        <tr>
+            <th>Branch Name</th>
+            <th>City</th>
+        </tr>
+        <tr th:each="branch : ${branches}">
+            <td th:text="${branch.name}">Branch Name</td>
+            <td th:text="${branch.city}">City</td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Result</title>
+</head>
+<body>
+<h1>Student Result</h1>
+<p>Student ID: <span th:text="${student.studentId}" /></p>
+<p>Student Name: <span th:text="${student.studentName}" /></p>
+<p>Science Marks: <span th:text="${student.scienceMarks}" /></p>
+<p>Math Marks: <span th:text="${student.mathMarks}" /></p>
+<p>Total Marks: <span th:text="${student.totalMarks}" /></p>
+<p>Average Marks: <span th:text="${student.averageMarks}" /></p>
+</body>
+</html>
