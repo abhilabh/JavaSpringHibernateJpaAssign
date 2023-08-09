@@ -18,8 +18,10 @@ public class MovieController {
 	@Autowired
 	private MovieRepository movieRepository;
 	@GetMapping("/allmovie")
-	public @ResponseBody List<Movie> getAllMovie() {
-		return movieRepository.findAll();
+	public  String getAllMovie(Model model) {
+		List<Movie> movies = movieRepository.findAll();
+		model.addAttribute("movies", movies);
+		return "movie-list";
 	}
 	
 	@GetMapping("/movie-form")
