@@ -1,6 +1,8 @@
 package com.wipro.pack.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,17 +32,51 @@ public class MovieController {
 		return "user-home";
 	}
 	
-	@GetMapping("/searchById")
-	public  String searchById(Model model) {
+	@GetMapping("/searchByIdForm")
+	public  String searchByIdForm(Model model) {
 		return "user-search-movie-by-id";
 	}
-	@GetMapping("/searchByName")
-	public  String searchByName(Model model) {
+	@GetMapping("/searchByNameForm")
+	public  String searchByNameForm(Model model) {
 		return "user-search-movie-by-name";
 	}
-	@GetMapping("/searchByCollection")
-	public  String searchByCollection(Model model) {
+	@GetMapping("/searchByCollectionForm")
+	public  String searchByCollectionForm(Model model) {
 		return "user-search-movie-by-collection";
+	}
+	
+	@PostMapping("/searchById")
+	public  String searchById(Model model, @RequestParam("movieId") Long id) {
+		Optional<Movie> movieOptional = movieRepository.findById(id);
+		System.out.println(movieOptional);
+		List<Optional<Movie>> movies = new ArrayList<>();
+		if (movieOptional.isPresent()) {
+	        movies.add(movieOptional);
+	    }
+	    
+	    model.addAttribute("movies", movies);
+	    return "user-search-result-success";
+	}
+	@PostMapping("/searchByName")
+    public String searchByName(@RequestParam("movieName") String movieName, Model model) {
+		System.out.println(movieName);
+        List<Movie> movies = movieRepository.findByMovieNameContaining(movieName);
+//        if (movie.isPresent()) {
+//            model.addAttribute("movies", List.of(movie.get())); // Wrap in a List
+//        }
+        model.addAttribute("movies", movies);
+        System.out.println(movies);
+        return "movie-list"; // Your JSP view name
+    }
+	@PostMapping("/searchByCollection")
+	public  String searchByCollection(Model model, @RequestParam("collectionFrom") int collectionFrom, @RequestParam("collectionTo") int collectionTo) {
+        List<Movie> movies = movieRepository.findByMovieCollectionBetween(collectionFrom, collectionTo);
+//        if (movie.isPresent()) {
+//            model.addAttribute("movies", List.of(movie.get())); // Wrap in a List
+//        }
+        model.addAttribute("movies", movies);
+        System.out.println(movies);
+        return "movie-list"; // Your JSP view name
 	}
 	
 	@GetMapping("/searchPage")

@@ -7,9 +7,9 @@
 	<div>
     <h1>Search</h1>
     <a href="/admin">admin</a>
-    <a href="/searchById">by Movie ID</a>
-    <a href="/searchByName">by Movie Name</a>
-    <a href="/searchByCollection">by Movie Collection</a>
+    <a href="/searchByIdForm">by Movie ID</a>
+    <a href="/searchByNameForm">by Movie Name</a>
+    <a href="/searchByCollectionForm">by Movie Collection</a>
     </div>
     
 </body>
