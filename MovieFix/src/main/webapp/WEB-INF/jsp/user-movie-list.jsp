@@ -1,11 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-
-    pageEncoding="ISO-8859-1"%>
-
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Movie List</title>
     <style>
@@ -18,7 +14,6 @@
             align-items: flex-start;
             min-height: 150vh;
         }
-
         .box-container {
             width: 70%;
             margin: 20px;
@@ -31,35 +26,27 @@
             /* top: 50%;
             left: 50%; */
         }
-
         .home-link {
             position: absolute;
             right: 10px;
             top: 10px;
         }
-
         table {
             border-collapse: collapse;
             width: 100%;
         }
-
-        th,
-        td {
+        th, td {
             border: 1px solid #dddddd;
             text-align: left;
             padding: 8px;
         }
-
         th {
             background-color: #f2f2f2;
         }
     </style>
-
 </head>
-
 <body>
     <div class="box-container">
-
         <h2>Movie List</h2>
         <table>
             <tr>
@@ -68,27 +55,16 @@
                 <th>Total Collection</th>
                 <!-- Add more columns as needed -->
             </tr>
-            <c:forEach items="${movies}" var="optionalMovie">
-                <c:choose>
-                    <c:when test="${optionalMovie.isPresent()}">
-                        <c:set var="movie" value="${optionalMovie.get()}" />
-                        <tr>
-                            <td>${movie.movieId}</td>
-                            <td>${movie.movieName}</td>
-                            <td>${movie.movieCollection}</td>
-                            <!-- Add more columns as needed -->
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <!-- Handle case when movie is not found -->
-                    </c:otherwise>
-                </c:choose>
+            <c:forEach items="${movies}" var="movie">
+                <tr>
+                    <td>${movie.movieId}</td>
+                    <td>${movie.movieName}</td>
+                    <td>${movie.movieCollection}</td>
+                    <!-- Add more columns as needed -->
+                </tr>
             </c:forEach>
-
-
         </table>
         <a class="home-link" href="/">Home</a>
     </div>
 </body>
-
 </html>

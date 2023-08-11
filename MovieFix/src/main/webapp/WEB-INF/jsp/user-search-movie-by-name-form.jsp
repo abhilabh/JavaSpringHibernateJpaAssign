@@ -14,7 +14,7 @@
 
         .box-container {
             width: 70%;
-            background-color: #ff4642;
+            background-color: #C1E1C1;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             text-align: start;
             position: relative;
@@ -22,14 +22,13 @@
         }
 
         .home-link {
-            display: flex;
-            justify-content: center;
+            position: absolute;
+            right: 10px;
+            top: 10px;
         }
 
         .internal {
             margin: 20px;
-            display: grid;
-            justify-content: center;
         }
     </style>
 </head>
@@ -38,8 +37,13 @@
     <div class="box-container">
         <div class="internal">
 
-            <h1>Please check your credential</h1>
-            <a class="home-link" href="/verifyLogin">Back</a>
+            <h2>Search by Movie Name</h2>
+            <form action="/searchByName" method="post">
+                <!-- Search form inputs here -->
+                <input type="text" name="movieName" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+            <a class="home-link" href="/">home</a>
         </div>
 
     </div>

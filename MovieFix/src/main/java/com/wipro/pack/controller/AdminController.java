@@ -41,12 +41,17 @@ public class AdminController {
 	
 	@GetMapping("/addMovieForm")
 	public  String addMovieForm() {
-		return "admin-movie-form";
+		return "admin-add-movie-form";
 	}
 	
+	@GetMapping("/modifyMovieForm")
+	public  String modifyMovieForm() {
+		return "admin-edit-movie-form";
+	}
+	
+	
 	@PostMapping("/modifyMovie")
-    public String modifyMovie(@RequestParam("movieId") Long id, @RequestParam("movieName") String movieName, @RequestParam("movieCollection") int movieCollection) {
-//        model.addAttribute("movie", new Movie());
+    public String modifyMovie(@RequestParam("movieId") String id, @RequestParam("movieName") String movieName, @RequestParam("movieCollection") int movieCollection) {
 		Movie movie = new Movie();
 		movie.setMovieId(id);
         movie.setMovieName(movieName);
@@ -55,14 +60,9 @@ public class AdminController {
         return "admin-add-Success";
     }
 	
-//	@GetMapping("/movie-form")
-//    public String showMovieForm(Model model) {
-//        model.addAttribute("movie", new Movie());
-//        return "admin-movie-form";
-//    }
 	
 	@PostMapping("/addMovie")
-	public String addMovie(@RequestParam("movieId") Long id, @RequestParam("movieName") String movieName, @RequestParam("movieCollection") int movieCollection) {
+	public String addMovie(@RequestParam("movieId") String id, @RequestParam("movieName") String movieName, @RequestParam("movieCollection") int movieCollection) {
         Movie movie = new Movie();
 		movie.setMovieId(id);
         movie.setMovieName(movieName);

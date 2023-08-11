@@ -34,24 +34,26 @@ public class MovieController {
 	
 	@GetMapping("/searchByIdForm")
 	public  String searchByIdForm(Model model) {
-		return "user-search-movie-by-id";
+		return "user-search-movie-by-id-form";
 	}
 	@GetMapping("/searchByNameForm")
 	public  String searchByNameForm(Model model) {
-		return "user-search-movie-by-name";
+		return "user-search-movie-by-name-form";
 	}
 	@GetMapping("/searchByCollectionForm")
 	public  String searchByCollectionForm(Model model) {
-		return "user-search-movie-by-collection";
+		return "user-search-movie-by-collection-form";
 	}
 	
 	@PostMapping("/searchById")
-	public  String searchById(Model model, @RequestParam("movieId") Long id) {
+	public  String searchById(Model model, @RequestParam("movieId") String id) {
 		Optional<Movie> movieOptional = movieRepository.findById(id);
 		System.out.println(movieOptional);
 		List<Optional<Movie>> movies = new ArrayList<>();
 		if (movieOptional.isPresent()) {
 	        movies.add(movieOptional);
+	    } else {
+	    	return "user-search-result-failure";
 	    }
 	    
 	    model.addAttribute("movies", movies);
@@ -61,22 +63,22 @@ public class MovieController {
     public String searchByName(@RequestParam("movieName") String movieName, Model model) {
 		System.out.println(movieName);
         List<Movie> movies = movieRepository.findByMovieNameContaining(movieName);
-//        if (movie.isPresent()) {
-//            model.addAttribute("movies", List.of(movie.get())); // Wrap in a List
-//        }
+        if (movies.isEmpty()) {
+        	return "user-search-result-failure";
+		}
         model.addAttribute("movies", movies);
         System.out.println(movies);
-        return "movie-list"; // Your JSP view name
+        return "user-movie-list"; // Your JSP view name
     }
 	@PostMapping("/searchByCollection")
 	public  String searchByCollection(Model model, @RequestParam("collectionFrom") int collectionFrom, @RequestParam("collectionTo") int collectionTo) {
         List<Movie> movies = movieRepository.findByMovieCollectionBetween(collectionFrom, collectionTo);
-//        if (movie.isPresent()) {
-//            model.addAttribute("movies", List.of(movie.get())); // Wrap in a List
-//        }
+        if (movies.isEmpty()) {
+        	return "user-search-result-failure";
+		}
         model.addAttribute("movies", movies);
         System.out.println(movies);
-        return "movie-list"; // Your JSP view name
+        return "user-movie-list"; // Your JSP view name
 	}
 	
 	@GetMapping("/searchPage")

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.wipro.pack.model.Movie;
 
-public interface MovieRepository extends JpaRepository<Movie, Long> {
+public interface MovieRepository extends JpaRepository<Movie, String> {
 	List<Movie> findByMovieNameContaining(String movieName);
 	List<Movie> findByMovieCollectionBetween(int minCollection, int maxCollection);
 }
