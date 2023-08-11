@@ -48,7 +48,6 @@ public class MovieController {
 	@PostMapping("/searchById")
 	public  String searchById(Model model, @RequestParam("movieId") String id) {
 		Optional<Movie> movieOptional = movieRepository.findById(id);
-		System.out.println(movieOptional);
 		List<Optional<Movie>> movies = new ArrayList<>();
 		if (movieOptional.isPresent()) {
 	        movies.add(movieOptional);
@@ -61,8 +60,7 @@ public class MovieController {
 	}
 	@PostMapping("/searchByName")
     public String searchByName(@RequestParam("movieName") String movieName, Model model) {
-		System.out.println(movieName);
-        List<Movie> movies = movieRepository.findByMovieNameContaining(movieName);
+        List<Movie> movies = movieRepository.findByMovieNameIgnoreCaseContaining(movieName);
         if (movies.isEmpty()) {
         	return "user-search-result-failure";
 		}
@@ -86,20 +84,4 @@ public class MovieController {
 		return "user-search-page";
 	}
 	
-	
-//	@GetMapping("/movie-form")
-//    public String showStudentForm(Model model) {
-//        model.addAttribute("movie", new Movie());
-//        return "movieForm";
-//    }
-	
-//	@PostMapping("/addMovie")
-//	public @ResponseBody Movie addMovie(@RequestParam("movieName") String movieName, @RequestParam("movieCollection") int movieCollection) {
-//        Movie movie = new Movie();
-//        movie.setMovieName(movieName);
-//        movie.setMovieCollection(movieCollection);
-//        
-//		movieRepository.save(movie);
-//		return movie;
-//    }
 }
